@@ -1,0 +1,40 @@
+#!/bin/bash
+set -eo pipefail
+
+INTERVAL="${MACH_INTERVAL:-240}"
+CACHE_FILE="/tmp/mach-cache.json"
+
+if [[ -f "$CACHE_FILE" && $(find "$CACHE_FILE" -mmin "-$INTERVAL" | wc -l) -gt 0 ]]; then
+  cat "$CACHE_FILE"
+  exit 0
+fi
+
+if [[ -n "$LARGEFILE" && -n "$SMALLFILE" && -n "$UPLOADEP" ]]; then
+  output=$(mach rpm --large "$LARGEFILE" --small "$SMALLFILE" --upload "$UPLOADEP" 2>&1)
+else
+  output=$(mach rpm 2>&1)
+fi
+
+json=$(echo "$output" | awk '/^\s*{/{found=1} found' | sed 's/[^[:print:][:space:]]//g')
+
+if ! echo "$json" | jq . >/dev/null 2>&1; then
+  >&2 echo "ERROR: Invalid JSON output from mach"
+  exit 1
+fi
+
+parsed=$(echo "$json" | jq '{
+  speedtest_unloaded_latency_ms: .unloaded_latency_ms,
+  speedtest_jitter_ms: .jitter_ms,
+  speedtest_download_throughput_bytes: .download.throughput,
+  speedtest_download_throughput_mbps: (.download.throughput / 1000000),
+  speedtest_download_latency_ms: .download.loaded_latency_ms,
+  speedtest_download_rpm: .download.rpm,
+  speedtest_upload_throughput_bytes: .upload.throughput,
+  speedtest_upload_throughput_mbps: (.upload.throughput / 1000000),
+  speedtest_upload_latency_ms: .upload.loaded_latency_ms,
+  speedtest_upload_rpm: .upload.rpm
+}')
+
+echo "$parsed" > "$CACHE_FILE"
+echo "$parsed"
+
