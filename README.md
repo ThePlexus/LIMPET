@@ -108,8 +108,7 @@ env vars. Query string API key authentication is supported
 	-e "SMALLFILE=https://your.server/your.small.file" \
 	-e "UPLOADEP=https://your.server/your.uploads.endpoint" \
 ```
-You can read more about [making your own server]
-(https://github.com/network-quality/server)
+You can read more about [making your own server](https://github.com/network-quality/server)
 
 ### Speed test interval
 By default, the test runs once every 240 minutes / 4 hours.
