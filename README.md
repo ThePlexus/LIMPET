@@ -92,7 +92,7 @@ docker run --name=limpet \
 That should be all you need to do and its now monitoring the above parameters.
 
 ### using your own config
-If you want to ping or web responsive test other hosts, dimply create your own 
+If you want to ping or web responsive test other hosts, simply create your own 
 telegraf.conf and set it when launching the container
 
 ```
