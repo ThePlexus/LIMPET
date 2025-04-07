@@ -10,10 +10,9 @@ by prometheus.
 ### Connection Speed, Jitter and RPM recording
 [networkquality-rs](https://github.com/cloudflare/networkquality-rs/) is a rust 
 tool which can measure the download speed, upload speed and jitter performance 
-of your connection, based on [Responsiveness under working conditions]
-(https://datatracker.ietf.org/doc/draft-ietf-ippm-responsiveness/). We use this
-tool which runs every 4 hours and records the upload, download speed, jitter
-and RPM 
+of your connection, based on [Responsiveness under working conditions](https://datatracker.ietf.org/doc/draft-ietf-ippm-responsiveness/). 
+We use this tool which runs every 4 hours and records the upload, download 
+speed, jitter and RPM. 
 
 RPM is Roundtrips Per Minute. The higher your RPM, the better. 
 
