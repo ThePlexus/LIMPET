@@ -2,6 +2,9 @@
 set -eo pipefail
 
 INTERVAL="${MACH_INTERVAL:-240}"
+if [ "$INTERVAL" -lt 60 ]; then
+  INTERVAL=60
+fi
 CACHE_FILE="/tmp/mach-cache.json"
 
 if [[ -f "$CACHE_FILE" && $(find "$CACHE_FILE" -mmin "-$INTERVAL" | wc -l) -gt 0 ]]; then

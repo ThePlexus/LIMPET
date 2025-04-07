@@ -110,12 +110,13 @@ You can read more about [making your own server]
 (https://github.com/network-quality/server)
 
 ### Speed test interval
-By default, the test runs once every 4 hours.You can modify the interval the 
-speed test runs at. It defaults to every 4 hours, 
-but you can make it more frequent by setting the time in minutes
-You probably don't need this lower than 60, your line conditions are better 
-monitored via ping and responsiveness tests, the bandwidth is unlikely to change 
-frequently.
+By default, the test runs once every 240 minutes / 4 hours.
+You can modify the interval the  speed test runs at. It defaults 
+to every 240 minutes / 4 hours,  but you can make it more frequent 
+by setting the time between runs, in minutes. You probably don't 
+need this lower than 60, your line conditions are better 
+monitored via ping and responsiveness tests, the bandwidth is 
+unlikely to change frequently.
 
 ```
 	-e "MACH_INTERVAL=60" \
