@@ -5,8 +5,7 @@
 A simple one shot system to measure your network uplink using Ping, HTTP and 
 [networkquality-rs](https://github.com/cloudflare/networkquality-rs/).
 The output is collated via telegraf and exportable on port 9100 for consumption 
-by prometheus. The collector persists the data of the last true run so each
-scrape by prometheus will always receive the data from the last run of the test.
+by prometheus. 
 
 ### Connection Speed, Jitter and RPM recording
 [networkquality-rs](https://github.com/cloudflare/networkquality-rs/) is a rust 
@@ -17,6 +16,10 @@ tool which runs every 4 hours and records the upload, download speed, jitter
 and RPM 
 
 RPM is Roundtrips Per Minute. The higher your RPM, the better. 
+
+The collector persists the data of the last true run so each scrape by 
+prometheus will always receive the data from the last run of the test.
+
 
 The metrics you want to look at are 
 ```
@@ -49,7 +52,7 @@ ping_percent_packet_loss
 ```
 
 ### DNS check
-Every munite a DNS responsiveness check is made to 4 Cloudflare DNS servers
+Every minute a DNS responsiveness check is made to 4 Cloudflare DNS servers
 ```
 1.1.1.1
 1.0.0.1
